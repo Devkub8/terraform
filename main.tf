@@ -34,48 +34,7 @@ resource "aws_instance" "myec2" {
     ami = "ami-0d81306eddc614a45"
     instance_type = "t2.micro"
    
-      key_name = "TF_key"
+      key_name = "jen"
 }
 
-resource "aws_key_pair" "TF_key" {
-  key_name   = "TF_key"
-  public_key = tls_private_key.rsa.public_key_openssh
-}
 
-resource "tls_private_key" "rsa" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
-resource "local_file" "TF-key" {
-    content  = tls_private_key.rsa.private_key_pem
-    filename = "tfkey"
-}
-resource "aws_security_group" "main" {
-  egress = [
-    {
-      cidr_blocks      = [ "0.0.0.0/0", ]
-      description      = ""
-      from_port        = 0
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      protocol         = "-1"
-      security_groups  = []
-      self             = false
-      to_port          = 0
-    }
-  ]
- ingress                = [
-   {
-     cidr_blocks      = [ "0.0.0.0/0", ]
-     description      = ""
-     from_port        = 22
-     ipv6_cidr_blocks = []
-     prefix_list_ids  = []
-     protocol         = "tcp"
-     security_groups  = []
-     self             = false
-     to_port          = 22
-  }
-  ]
-}
