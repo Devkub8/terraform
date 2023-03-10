@@ -31,7 +31,7 @@ resource "aws_subnet" "mysub" {
 # }
  
 resource "aws_instance" "myec2" {
-    ami = "ami-0f8ca728008ff5af4"
+    ami = "ami-0d81306eddc614a45"
     instance_type = "t2.micro"
    
       key_name = "TF_key"
